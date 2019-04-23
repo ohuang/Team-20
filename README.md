@@ -18,6 +18,17 @@ Team 20, better known as **21CFC**, is the hottest new team to come out of Stanf
 |Cade|Machine learning, full stack development, mobile development|Persistent, creative, contemplative, thorough|Visual design, writing documentation|Overthinking things, perfectionism|
 |Rei||||
 
+## Contact Us
+
+We use Slack to communicate, but the most reliable way to reach us externally is probably by email.
+
+- Toby <tbell@stanford.edu>
+- Oliver <ohuang@stanford.edu>
+- Reinaldo <rperez4@stanford.edu>
+- Hayden <hlittle@stanford.edu>
+- Cade <cademay@stanford.edu>
+
+
 # Our Project
 
 We will be creating a macOS app that uses optical character recognition (OCR) to allow the user to easily select and copy to the clipboard *any* visible text on the user's screen, whether that text is in a picture, a video, or "real" selectable text. The app will be activated by a global keyboard shortcut (like taking a screenshot) and will temporarily put the user's screen into a text-selection mode until they copy something to the clipboard or press <kbd>Esc</kbd>.
