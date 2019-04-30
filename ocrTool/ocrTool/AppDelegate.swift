@@ -11,7 +11,7 @@ import Cocoa
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
-
+    
     //16.0 to be replaced with NSStatusItem.squareLength after updating xcode
     let statusItem = NSStatusBar.system().statusItem(withLength: 16.0)
     

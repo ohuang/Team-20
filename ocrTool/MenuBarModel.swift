@@ -16,8 +16,16 @@ class MenuBarModel: NSObject {
         // take over the screen/cursor, then enable and execute OCR functionality
         
         NSCursor.crosshair().set()
+        let viewController = NSStoryboard(name: "Main", bundle: nil).instantiateController(withIdentifier: "imageView")
+        
+        // .instantiatViewControllerWithIdentifier() returns AnyObject! this must be downcast to utilize it
+        
+        presentViewController(viewController, animated: false, completion: nil)
         
         print("in model-main")
     }
+    
+    
+    
 
 }
