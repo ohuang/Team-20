@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class ActivationViewController: NSViewController, NSWindowDelegate {
+class ActivationViewController: NSViewController /*, NSWindowDelegate*/ {
 
     @IBOutlet weak var ocrButtonOutlet: NSButton!
     
@@ -34,6 +34,20 @@ class ActivationViewController: NSViewController, NSWindowDelegate {
         
         screenshotImageViewOutlet.imageScaling = NSImageScaling.scaleProportionallyUpOrDown
         
+        self.view.window?.toggleFullScreen(nil)
+        
+        //self.view.window?.setFrame(NSScreen.main()!.visibleFrame, display: true, animate: false)
+
+        //dont do this!! takes over your screen; let's investigate that comman d though because it could be 
+        // close to what we want; withOptions>:etc
+        // look into this: https://forums.developer.apple.com/thread/27333
+        //self.view.enterFullScreenMode(NSScreen.main()!)
+        
+        //self.toggle
+        
+        
+        
+        
         /*
         let gImage = CGWindowListCreateImage(
             CGRect.null,
@@ -45,7 +59,7 @@ class ActivationViewController: NSViewController, NSWindowDelegate {
         */
         // display screenshot
         
-            
+        
     }
     
     func windowDidResize(_ notification: Notification) {

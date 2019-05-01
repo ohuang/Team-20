@@ -288,6 +288,7 @@
 				CA1C961B22741D6000E57E7C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
