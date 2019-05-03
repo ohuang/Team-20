@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CA80ADC9226E987100CEDF21 /* MenuBarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA80ADC8226E987100CEDF21 /* MenuBarModel.swift */; };
 		CADCB9DA226E7DD800B5698E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADCB9D9226E7DD800B5698E /* AppDelegate.swift */; };
 		CADCB9DC226E7DD800B5698E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CADCB9DB226E7DD800B5698E /* ViewController.swift */; };
 		CADCB9DE226E7DD800B5698E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CADCB9DD226E7DD800B5698E /* Assets.xcassets */; };
@@ -15,7 +14,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		CA80ADC8226E987100CEDF21 /* MenuBarModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuBarModel.swift; path = ../MenuBarModel.swift; sourceTree = "<group>"; };
 		CADCB9D6226E7DD800B5698E /* ocrTool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ocrTool.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CADCB9D9226E7DD800B5698E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CADCB9DB226E7DD800B5698E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -35,14 +33,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		CA80ADCA226E987A00CEDF21 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				CA80ADC8226E987100CEDF21 /* MenuBarModel.swift */,
-			);
-			name = Models;
-			sourceTree = "<group>";
-		};
 		CADCB9CD226E7DD800B5698E = {
 			isa = PBXGroup;
 			children = (
@@ -64,7 +54,6 @@
 			children = (
 				CADCB9DB226E7DD800B5698E /* ViewController.swift */,
 				CADCB9D9226E7DD800B5698E /* AppDelegate.swift */,
-				CA80ADCA226E987A00CEDF21 /* Models */,
 				CADCB9DD226E7DD800B5698E /* Assets.xcassets */,
 				CADCB9DF226E7DD800B5698E /* Main.storyboard */,
 				CADCB9E2226E7DD800B5698E /* Info.plist */,
@@ -104,6 +93,7 @@
 				TargetAttributes = {
 					CADCB9D5226E7DD800B5698E = {
 						CreatedOnToolsVersion = 8.3.3;
+						LastSwiftMigration = 1010;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -144,7 +134,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CADCB9DC226E7DD800B5698E /* ViewController.swift in Sources */,
-				CA80ADC9226E987100CEDF21 /* MenuBarModel.swift in Sources */,
 				CADCB9DA226E7DD800B5698E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -262,9 +251,11 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = ocrTool/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				PRODUCT_BUNDLE_IDENTIFIER = "N-a.ocrTool";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -275,9 +266,11 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = ocrTool/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				PRODUCT_BUNDLE_IDENTIFIER = "N-a.ocrTool";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};

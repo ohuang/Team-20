@@ -13,9 +13,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     
     //16.0 to be replaced with NSStatusItem.squareLength after updating xcode
-    let statusItem = NSStatusBar.system().statusItem(withLength: 16.0)
+    let statusItem = NSStatusBar.system.statusItem(withLength: 27.0)
     
-    let model = MenuBarModel()
+//    let model = MenuBarModel()
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
@@ -32,7 +32,27 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     // called when the "Enter OCR Mode" button is pressed
     @objc func enterOcrMode(_ sender: Any?) {
-        model.enableOCR()
+        print("hi")
+        
+        if let screen = NSScreen.main {
+            let frame = screen.visibleFrame
+            let window = NSWindow(contentRect: frame,
+                                  styleMask: [],
+                                  backing: .buffered,
+                                  defer: false,
+                                  screen: NSScreen.screens[0])
+            window.backgroundColor = NSColor(deviceRed: 0.9, green: 0.2, blue: 0.1, alpha: 0.4)
+            window.isOpaque = false
+            window.level = NSWindow.Level.screenSaver
+            window.isReleasedWhenClosed = true
+            window.ignoresMouseEvents = false
+            window.makeKeyAndOrderFront(nil)
+            
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + DispatchTimeInterval.seconds(2), execute: { () in
+                window.close()
+            })
+        }
+//        model.enableOCR()
     }
 
     
