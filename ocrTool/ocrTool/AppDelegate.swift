@@ -8,74 +8,97 @@
 
 import Cocoa
 
-@NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
-    
-    //16.0 to be replaced with NSStatusItem.squareLength after updating xcode
-    let statusItem = NSStatusBar.system.statusItem(withLength: 27.0)
-    
-//    let model = MenuBarModel()
+    var statusItem: NSStatusItem!
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        // Insert code here to initialize your application
-        
-        
-        if let button = statusItem.button {
-            button.image = NSImage(named: "icon")
-            //button.action = #selector(appSelected(_:)) //
-        }
-        
-        // programmatically create menu
-        constructMenu()
+        statusItem = createStatusItem()
     }
     
     // called when the "Enter OCR Mode" button is pressed
     @objc func enterOcrMode(_ sender: Any?) {
-        print("hi")
-        
-        if let screen = NSScreen.main {
-            let frame = screen.visibleFrame
-            let window = NSWindow(contentRect: frame,
-                                  styleMask: [],
-                                  backing: .buffered,
-                                  defer: false,
-                                  screen: NSScreen.screens[0])
-            window.backgroundColor = NSColor(deviceRed: 0.9, green: 0.2, blue: 0.1, alpha: 0.4)
-            window.isOpaque = false
-            window.level = NSWindow.Level.screenSaver
-            window.isReleasedWhenClosed = true
-            window.ignoresMouseEvents = false
-            window.makeKeyAndOrderFront(nil)
-            
-            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + DispatchTimeInterval.seconds(2), execute: { () in
-                window.close()
-            })
+        let screenshot = getScreenShot()
+        let _ = CaptureWindow(image: screenshot) { image in
+            let url = self.saveImage(image)
+            if let text = self.runTess(url) {
+                let pasteboard = NSPasteboard.general
+                pasteboard.clearContents()
+                pasteboard.declareTypes([.string], owner: nil)
+                pasteboard.setString(text, forType: .string)
+            }
         }
-//        model.enableOCR()
-    }
-
-    
-    func applicationWillTerminate(_ aNotification: Notification) {
-        // Insert code here to tear down your application
     }
     
-    // called when menu bar icon is selected
-    @objc func appSelected(_ sender: Any?) {
-        print("user has clicked the icon in the menu bar")
-    }
-
-
-    func constructMenu() {
+    func runTess(_ url: URL) -> String? {
+        let dirURL = self.appSupportDirectory()
+        let outBase = dirURL.appendingPathComponent("out")
+        let outURL = dirURL.appendingPathComponent("out.txt")
         
+        let tess = Process()
+        tess.launchPath = "/opt/local/bin/tesseract"
+        tess.arguments = [url.path, outBase.path]
+        do {
+            try tess.run()
+            tess.waitUntilExit()
+        } catch { return nil }
+        
+        do {
+            return try String.init(contentsOf: outURL)
+        } catch { return nil }
+    }
+    
+    func saveImage(_ image: NSImage) -> URL {
+        var rect = CGRect(origin: .zero, size: image.size)
+        let cgImage = image.cgImage(forProposedRect: &rect, context: nil, hints: nil)!
+        let bitmap = NSBitmapImageRep(cgImage: cgImage)
+        let data = bitmap.representation(using: .png, properties: [:])!
+        
+        let dirURL = self.appSupportDirectory()
+        let fileURL = dirURL.appendingPathComponent("image.png")
+        do {
+            try data.write(to: fileURL)
+            print(fileURL)
+        } catch {}
+        return fileURL
+    }
+    
+    func appSupportDirectory() -> URL {
+        let fileManager = FileManager.default
+        let globalDirURL = fileManager.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
+        let localDirURL = globalDirURL.appendingPathComponent("OCRTool")
+        
+        do {
+            try fileManager.createDirectory(at: localDirURL,
+                                            withIntermediateDirectories: false,
+                                            attributes: nil)
+        } catch {}
+        
+        return localDirURL
+    }
+    
+    func getScreenShot() -> NSImage {
+        // TODO: Look into CGDisplayCapture or whatever it's called
+        
+        let mainDisplayID = CGMainDisplayID()
+        let screenshot = CGDisplayCreateImage(mainDisplayID)!
+        let size = CGSize(width: screenshot.width / 2, height: screenshot.height / 2)
+        return NSImage(cgImage: screenshot, size: size)
+    }
+    
+    func createStatusItem() -> NSStatusItem {
+        let statusBar = NSStatusBar.system
+        let item = statusBar.statusItem(withLength: NSStatusItem.squareLength)
+        item.button!.image = NSImage(named: "icon")!
+        item.menu = createStatusMenu()
+        return item
+    }
+
+    func createStatusMenu() -> NSMenu {
         let menu = NSMenu()
-        
-        menu.addItem(NSMenuItem(title: "Enter OCR Mode", action: #selector(AppDelegate.enterOcrMode(_:)), keyEquivalent: "P"))
+        menu.addItem(NSMenuItem(title: "Capture Text", action: #selector(AppDelegate.enterOcrMode(_:)), keyEquivalent: ""))
         menu.addItem(NSMenuItem.separator())
-        menu.addItem(NSMenuItem(title: "Quit OCR Tool", action: #selector(NSApplication.terminate(_:)), keyEquivalent: "q"))
-        
-        statusItem.menu = menu
+        menu.addItem(NSMenuItem(title: "Quit OCR Tool", action: #selector(NSApplication.terminate(_:)), keyEquivalent: ""))
+        return menu
     }
-
 }
-
