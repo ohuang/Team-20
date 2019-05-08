@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14490.70"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Window Controller-->
+        <scene sceneID="N16-dm-BEv">
+            <objects>
+                <windowController id="Gle-8K-FeU" sceneMemberID="viewController">
+                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="DQS-72-rRZ">
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+                        <rect key="contentRect" x="196" y="249" width="480" height="270"/>
+                        <rect key="screenRect" x="0.0" y="0.0" width="1440" height="900"/>
+                        <connections>
+                            <outlet property="delegate" destination="Gle-8K-FeU" id="Vee-eQ-jlY"/>
+                        </connections>
+                    </window>
+                    <connections>
+                        <segue destination="yYl-2a-ORF" kind="relationship" relationship="window.shadowedContentViewController" id="bdi-Xm-bZ6"/>
+                    </connections>
+                </windowController>
+                <customObject id="UZ0-9Y-0mk" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="332" y="309"/>
+        </scene>
+        <!--Preferences-->
+        <scene sceneID="1ZH-9V-3EZ">
+            <objects>
+                <viewController title="Preferences" storyboardIdentifier="PreferencesViewController" id="yYl-2a-ORF" customClass="PreferencesViewController" customModule="ocrTool" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="SiR-fG-5hd">
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TwI-Us-clk">
+                                <rect key="frame" x="156" y="221" width="168" height="18"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="check" title="Vocalize Captured Text?" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="ZGf-zB-3Jk">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="vocalizeCheckBoxAction:" target="yYl-2a-ORF" id="0fR-KQ-a6x"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                    </view>
+                    <connections>
+                        <outlet property="vocalizeTextCheckBoxOutlet" destination="TwI-Us-clk" id="8BO-en-Xbv"/>
+                    </connections>
+                </viewController>
+                <customObject id="u88-gq-dRE" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="338" y="768"/>
+        </scene>
+    </scenes>
+</document>
